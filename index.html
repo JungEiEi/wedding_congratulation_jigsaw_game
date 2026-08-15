@@ -1,0 +1,1049 @@
+
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Congratulations Jakkrit & Narumon - Jigsaw Game</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(135deg, #fff5f7 0%, #fce7f3 40%, #fef3c7 100%);
+      min-height: 100vh;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .font-wedding {
+      font-family: 'Great Vibes', cursive;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #fbcfe8;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #f472b6;
+      border-radius: 4px;
+    }
+    /* Floating Hearts Animation */
+    .heart-particle {
+      position: absolute;
+      pointer-events: none;
+      animation: floatUp 4s linear infinite;
+      opacity: 0.7;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.8) rotate(0deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    /* Glowing Border Effects */
+    .gold-glow {
+      box-shadow: 0 10px 30px -5px rgba(234, 179, 8, 0.3), 0 0 20px 2px rgba(244, 114, 182, 0.4);
+    }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-hover:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 35px -10px rgba(236, 72, 153, 0.3);
+    }
+  </style>
+</head>
+<body class="relative overflow-x-hidden text-slate-800">
+
+  <!-- Background Floating Hearts Container -->
+  <div id="heart-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+  <!-- Audio Control Floating Bar -->
+  <div class="fixed top-4 right-4 z-50">
+    <button id="btn-toggle-audio" onclick="toggleAudio()" class="flex items-center gap-2 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-pink-200 text-pink-600 font-medium hover:bg-pink-50 transition-all text-sm sm:text-base">
+      <!--span id="audio-icon">🎵</span>
+      <span id="audio-text">เปิดเพลงรัก</span-->
+    </button>
+  </div>
+
+  <!-- PAGE 1: HOME - WEDDING CARD SCREEN -->
+  <section id="view-home" class="min-h-screen flex flex-col items-center justify-center p-4 relative z-10">
+    <!-- Header Title -->
+    <div class="text-center mb-6 space-y-2">
+      <h1 class="text-4xl sm:text-6xl font-bold font-wedding text-rose-600 drop-shadow-sm pt-2">
+        Congratulations
+      </h1>
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 tracking-wide">
+        Jakkrit & Narumon
+      </h2>
+      <p class="text-rose-500 font-medium text-sm sm:text-base">
+        🗓️ 22 NOVEMBER 2026
+      </p>
+    </div>
+
+    <!-- Main Interactive Card Showcase -->
+    <div onclick="goToSelection()" class="group cursor-pointer relative max-w-md w-full bg-white rounded-3xl p-4 sm:p-5 gold-glow card-hover border-4 border-amber-200/80">
+      <!-- Decorative Corner Floral Accents -->
+      <div class="absolute -top-3 -left-3 text-2xl sm:text-3xl">🌸</div>
+      <div class="absolute -top-3 -right-3 text-2xl sm:text-3xl">🌸</div>
+      <div class="absolute -bottom-3 -left-3 text-2xl sm:text-3xl">💐</div>
+      <div class="absolute -bottom-3 -right-3 text-2xl sm:text-3xl">💐</div>
+
+      <!-- Wedding Card Image -->
+      <div class="relative overflow-hidden rounded-2xl bg-amber-50 shadow-inner">
+        <img id="home-card-img" src="w1.jpg" alt="การ์ดแต่งงาน Jakkrit & Narumon" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500" onerror="handleImageError(this, 'card')">
+        
+        <!-- Overlay Prompt -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-end p-6 text-white text-center">
+          <div class="bg-rose-500/90 backdrop-blur-md px-5 py-2.5 rounded-full text-sm sm:text-base font-semibold shadow-lg flex items-center gap-2 animate-bounce">
+            <span>🧩</span>
+            <span>คลิกที่การ์ดเพื่อเริ่มต่อจิ๊กซอว์</span>
+          </div>
+          <p class="text-xs text-rose-100 mt-2">ร่วมเติมเต็มภาพความทรงจำของบ่าวสาว</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub Message -->
+    <p class="text-center text-slate-500 text-xs sm:text-sm mt-6 max-w-md">
+      "Wishing you a lifetime of love and joy" 
+    </p>
+  </section>
+
+  <!-- PAGE 2: PHOTO SELECTION SCREEN -->
+  <section id="view-select" class="min-h-screen hidden flex-col items-center justify-center p-4 sm:p-8 relative z-10 max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-8 space-y-2">
+      <button onclick="goToHome()" class="inline-flex items-center gap-1 text-xs sm:text-sm text-rose-600 bg-white/80 px-3 py-1.5 rounded-full shadow border border-pink-200 hover:bg-rose-50 transition mb-2">
+        ‹ กลับหน้าการ์ดแต่งงาน
+      </button>
+      <h2 class="text-3xl sm:text-4xl font-bold text-slate-800">
+        🌸 เลือกภาพความทรงจำที่ต้องการต่อจิ๊กซอว์ 🌸
+      </h2>
+      <p class="text-slate-600 text-sm sm:text-base">
+        เลือก 1 จาก 4 ภาพประทับใจ แล้วมาลองต่อภาพความรักให้สมบูรณ์กันเลย!
+      </p>
+
+      <!-- Difficulty Selector -->
+      <div class="flex items-center justify-center gap-2 pt-4">
+        <span class="text-xs sm:text-sm font-semibold text-slate-700">ระดับความยาก:</span>
+        <button onclick="setDifficulty(3)" id="diff-3" class="px-3 py-1 rounded-full text-xs sm:text-sm font-medium border transition bg-rose-500 text-white border-rose-500 shadow">
+          ง่าย (3x3)
+        </button>
+        <button onclick="setDifficulty(4)" id="diff-4" class="px-3 py-1 rounded-full text-xs sm:text-sm font-medium border transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50">
+          ปานกลาง (4x4)
+        </button>
+        <button onclick="setDifficulty(5)" id="diff-5" class="px-3 py-1 rounded-full text-xs sm:text-sm font-medium border transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50">
+          ท้าทาย (5x5)
+        </button>
+      </div>
+    </div>
+
+    <!-- 4 Photo Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+      <!-- Card 1 -->
+      <div onclick="selectPuzzle(0)" class="bg-white rounded-2xl p-4 shadow-md border border-pink-100 card-hover cursor-pointer group flex flex-col justify-between">
+        <div>
+          <div class="aspect-[4/3] rounded-xl overflow-hidden mb-3 bg-slate-100 relative">
+            <img src="w2.jpg" alt="ความทรงจำที่ Siam" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="handleImageError(this, 'puzzle1')">
+            <span class="absolute top-2 left-2 bg-pink-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+              ภาพที่ 1
+            </span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base group-hover:text-pink-600 transition">
+            ความทรงจำที่ Siam
+          </h3>
+          <p class="text-xs text-slate-500 mt-1">
+            รักสดใส สไตล์สตรีทอาร์ตย่านสยาม
+          </p>
+        </div>
+        <button class="mt-4 w-full py-2 bg-rose-50 text-rose-600 group-hover:bg-rose-500 group-hover:text-white rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1">
+          <span>เริ่มต่อภาพนี้</span> ➔
+        </button>
+      </div>
+
+      <!-- Card 2 -->
+      <div onclick="selectPuzzle(1)" class="bg-white rounded-2xl p-4 shadow-md border border-pink-100 card-hover cursor-pointer group flex flex-col justify-between">
+        <div>
+          <div class="aspect-[4/3] rounded-xl overflow-hidden mb-3 bg-slate-100 relative">
+            <img src="w3.jpg" alt="วินเทจโปสเตอร์" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="handleImageError(this, 'puzzle2')">
+            <span class="absolute top-2 left-2 bg-pink-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+              ภาพที่ 2
+            </span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base group-hover:text-pink-600 transition">
+            วินเทจโปสเตอร์
+          </h3>
+          <p class="text-xs text-slate-500 mt-1">
+            ลุควินเทจเหนือกาลเวลา หน้าผนังโปสเตอร์
+          </p>
+        </div>
+        <button class="mt-4 w-full py-2 bg-rose-50 text-rose-600 group-hover:bg-rose-500 group-hover:text-white rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1">
+          <span>เริ่มต่อภาพนี้</span> ➔
+        </button>
+      </div>
+
+      <!-- Card 3 -->
+      <div onclick="selectPuzzle(2)" class="bg-white rounded-2xl p-4 shadow-md border border-pink-100 card-hover cursor-pointer group flex flex-col justify-between">
+        <div>
+          <div class="aspect-[4/3] rounded-xl overflow-hidden mb-3 bg-slate-100 relative">
+            <img src="w4.jpg" alt="กำแพงอิฐแห่งรัก" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="handleImageError(this, 'puzzle3')">
+            <span class="absolute top-2 left-2 bg-pink-500/90 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+              ภาพที่ 3
+            </span>
+          </div>
+          <h3 class="font-bold text-slate-800 text-base group-hover:text-pink-600 transition">
+            กำแพงอิฐแห่งรัก
+          </h3>
+          <p class="text-xs text-slate-500 mt-1">
+            ความอบอุ่น ละมุนหัวใจ หน้ากำแพงอิฐ
+          </p>
+        </div>
+        <button class="mt-4 w-full py-2 bg-rose-50 text-rose-600 group-hover:bg-rose-500 group-hover:text-white rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1">
+          <span>เริ่มต่อภาพนี้</span> ➔
+        </button>
+      </div>
+
+  </section>
+
+  <!-- PAGE 3: JIGSAW GAME CANVAS SCREEN -->
+  <section id="view-game" class="min-h-screen hidden flex-col items-center p-3 sm:p-6 relative z-10 max-w-5xl mx-auto">
+    <!-- Top Nav Bar -->
+    <div class="w-full flex flex-wrap items-center justify-between gap-3 bg-white/90 backdrop-blur-md p-3 sm:p-4 rounded-2xl shadow-sm border border-pink-100 mb-4">
+      <div class="flex items-center gap-2">
+        <button onclick="goToSelection()" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs sm:text-sm font-medium transition flex items-center gap-1">
+          ‹ เลือกภาพใหม่
+        </button>
+        <button onclick="goToHome()" class="px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl text-xs sm:text-sm font-medium transition flex items-center gap-1">
+          🏠 หน้าแรก
+        </button>
+      </div>
+
+      <div class="text-center">
+        <h3 id="game-photo-title" class="font-bold text-slate-800 text-sm sm:text-base">
+          ชื่อภาพ
+        </h3>
+        <span id="game-diff-tag" class="text-[11px] text-rose-500 font-semibold bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
+          ง่าย (3x3)
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="openPreviewModal()" class="px-3 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-xl text-xs sm:text-sm font-medium transition border border-amber-200 flex items-center gap-1">
+          👁️ ตัวอย่างภาพ
+        </button>
+        <button onclick="restartPuzzle()" class="px-3 py-1.5 bg-pink-500 hover:bg-pink-600 text-white rounded-xl text-xs sm:text-sm font-medium transition shadow flex items-center gap-1">
+          🔄 เริ่มใหม่
+        </button>
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="w-full grid grid-cols-3 gap-2 bg-rose-50/80 p-3 rounded-xl border border-rose-100 mb-4 text-center">
+      <div>
+        <span class="text-[11px] text-slate-500 block">⏱️ เวลาที่ใช้</span>
+        <span id="stat-time" class="text-sm sm:text-lg font-bold text-slate-800">00:00</span>
+      </div>
+      <div>
+        <span class="text-[11px] text-slate-500 block">🧩 ความคืบหน้า</span>
+        <span id="stat-progress" class="text-sm sm:text-lg font-bold text-rose-600">0 / 9 (0%)</span>
+      </div>
+      <div>
+        <span class="text-[11px] text-slate-500 block">🎯 ย้ายชิ้นส่วน</span>
+        <span id="stat-moves" class="text-sm sm:text-lg font-bold text-slate-800">0 ครั้ง</span>
+      </div>
+    </div>
+
+    <!-- Game Canvas Container -->
+    <div class="w-full flex flex-col items-center justify-center relative">
+      <div class="bg-white p-2 sm:p-4 rounded-2xl shadow-xl border-2 border-pink-200 overflow-hidden max-w-full">
+        <canvas id="jigsaw-canvas" class="touch-none cursor-grab active:cursor-grabbing rounded-lg bg-slate-50 block mx-auto"></canvas>
+      </div>
+      <p class="text-xs text-slate-500 mt-3 text-center">
+        💡 <b>วิธีเล่น:</b> ลากชิ้นส่วนจากถาดด้านล่างไปวางในกรอบตารางภาพด้านบน เมื่อใกล้ตำแหน่งถูกต้องชิ้นส่วนจะล็อกให้อัตโนมัติ!
+      </p>
+    </div>
+  </section>
+
+  <!-- MODAL: PREVIEW ORIGINAL IMAGE -->
+  <div id="modal-preview" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-4 sm:p-6 max-w-lg w-full shadow-2xl relative animate-in fade-in zoom-in duration-200">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-slate-800 text-lg">📸 ภาพต้นแบบ (Original Photo)</h3>
+        <button onclick="closePreviewModal()" class="text-slate-400 hover:text-slate-600 text-xl font-bold p-1">✕</button>
+      </div>
+      <div class="rounded-2xl overflow-hidden bg-slate-100 aspect-[4/3] max-h-[70vh]">
+        <img id="preview-img-target" src="" alt="Preview" class="w-full h-full object-contain">
+      </div>
+      <button onclick="closePreviewModal()" class="mt-4 w-full py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl font-semibold transition">
+        กลับไปเล่นต่อ
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: VICTORY / PUZZLE COMPLETED -->
+  <div id="modal-win" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl border-4 border-amber-300 relative transform animate-bounce-short">
+      <div class="text-5xl mb-2">🎉</div>
+      <h2 class="text-3xl font-bold font-wedding text-rose-600">Congratulations!</h2>
+      <h3 class="text-xl font-bold text-slate-800 mt-1">คุณต่อจิ๊กซอว์สำเร็จแล้ว!</h3>
+      <p class="text-sm text-slate-600 mt-2">
+        "ขอให้ความรักของ Jakkrit & Narumon งดงาม สมบูรณ์แบบ และเต็มไปด้วยความสุขเฉกเช่นภาพนี้!"
+      </p>
+
+      <div class="bg-rose-50 rounded-2xl p-4 my-5 space-y-2 text-sm text-slate-700 border border-rose-100">
+        <div class="flex justify-between">
+          <span>⏱️ เวลาที่ใช้:</span>
+          <span id="win-time" class="font-bold text-rose-600">00:00</span>
+        </div>
+        <div class="flex justify-between">
+          <span>🎯 จำนวนครั้งที่ลากวาง:</span>
+          <span id="win-moves" class="font-bold text-rose-600">0 ครั้ง</span>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <button onclick="restartPuzzle(); closeWinModal();" class="w-full py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-xl font-semibold shadow transition">
+          🔁 เล่นภาพนี้อีกครั้ง
+        </button>
+        <button onclick="goToSelection(); closeWinModal();" class="w-full py-2.5 bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-xl font-semibold transition">
+          🖼️ เลือกภาพอื่น
+        </button>
+        <button onclick="goToHome(); closeWinModal();" class="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-sm transition">
+          🏠 กลับหน้าแรก
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       DATA & GLOBAL CONFIGURATION
+       ========================================================================== */
+    const puzzleData = [
+      {
+        id: 0,
+        title: "ความทรงจำที่ Siam",
+        src: "12791.jpg",
+        description: "รักสดใส สไตล์สตรีทอาร์ตย่านสยาม"
+      },
+      {
+        id: 1,
+        title: "วินเทจโปสเตอร์",
+        src: "12792.jpg",
+        description: "ลุควินเทจเหนือกาลเวลา หน้าผนังโปสเตอร์"
+      },
+      {
+        id: 2,
+        title: "กำแพงอิฐแห่งรัก",
+        src: "12795.jpg",
+        description: "ความอบอุ่น ละมุนหัวใจ หน้ากำแพงอิฐ"
+      },
+      {
+        id: 3,
+        title: "บรรยากาศคลาสสิก",
+        src: "12793.jpg",
+        description: "กุมมือเดินเคียงข้างบนบันไดสุดคลาสสิก"
+      }
+    ];
+
+    let currentPuzzleIndex = 0;
+    let gridSize = 3; // Default 3x3
+    let timerInterval = null;
+    let secondsElapsed = 0;
+    let moveCount = 0;
+    let isGameWon = false;
+
+    // Canvas Engine Variables
+    let canvas, ctx;
+    let puzzleImg = new Image();
+    let pieces = [];
+    let draggedPiece = null;
+    let dragOffsetX = 0;
+    let dragOffsetY = 0;
+
+    // Dimensions
+    let boardX = 0, boardY = 0;
+    let boardW = 0, boardH = 0;
+    let cellW = 0, cellH = 0;
+    let trayY = 0, trayH = 0;
+
+    /* ==========================================================================
+       WEB AUDIO API - SYNTHESIZED ROMANTIC MUSIC & SOUND EFFECTS
+       ========================================================================== */
+    let audioCtx = null;
+    let isAudioPlaying = false;
+    let musicInterval = null;
+
+    function initAudioContext() {
+      if (!audioCtx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioCtx();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function toggleAudio() {
+      initAudioContext();
+      if (isAudioPlaying) {
+        stopLoveMusic();
+      } else {
+        startLoveMusic();
+      }
+    }
+
+    function startLoveMusic() {
+      isAudioPlaying = true;
+      document.getElementById('audio-icon').textContent = '🎵';
+      document.getElementById('audio-text').textContent = 'ปิดเพลงรัก';
+
+      const notes = [
+        261.63, 329.63, 392.00, 493.88, // C4, E4, G4, B4 (Cmaj7)
+        220.00, 261.63, 329.63, 392.00, // A3, C4, E4, G4 (Am7)
+        174.61, 220.00, 261.63, 349.23, // F3, A3, C4, F4 (Fmaj)
+        196.00, 246.94, 293.66, 392.00  // G3, B3, D4, G4 (G7)
+      ];
+
+      let step = 0;
+      function playChordStep() {
+        if (!isAudioPlaying || !audioCtx) return;
+        const now = audioCtx.currentTime;
+        const chordIdx = (Math.floor(step / 4) % 4) * 4;
+
+        // Play subtle bass chord note
+        playSynthNote(notes[chordIdx], now, 2.5, 'sine', 0.05);
+        playSynthNote(notes[chordIdx + 2], now + 0.1, 2.2, 'sine', 0.04);
+
+        // Play gentle piano melody note
+        const melNote = notes[chordIdx + (step % 4)];
+        playSynthNote(melNote * 2, now + 0.2, 0.8, 'triangle', 0.06);
+
+        step++;
+      }
+
+      playChordStep();
+      musicInterval = setInterval(playChordStep, 800);
+    }
+
+    function stopLoveMusic() {
+      isAudioPlaying = false;
+      document.getElementById('audio-icon').textContent = '🔇';
+      document.getElementById('audio-text').textContent = 'เปิดเพลงรัก';
+      if (musicInterval) clearInterval(musicInterval);
+    }
+
+    function playSynthNote(freq, time, duration, type = 'sine', vol = 0.1) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, time);
+
+        gain.gain.setValueAtTime(0.001, time);
+        gain.gain.exponentialRampToValueAtTime(vol, time + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(time);
+        osc.stop(time + duration);
+      } catch (e) {}
+    }
+
+    function playSnapSound() {
+      initAudioContext();
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      playSynthNote(523.25, now, 0.12, 'sine', 0.12); // C5
+      playSynthNote(659.25, now + 0.06, 0.2, 'triangle', 0.15); // E5
+    }
+
+    function playWinFanfare() {
+      initAudioContext();
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const fanfare = [523.25, 659.25, 783.99, 1046.50];
+      fanfare.forEach((f, i) => {
+        playSynthNote(f, now + i * 0.12, 0.5, 'triangle', 0.15);
+      });
+    }
+
+    /* ==========================================================================
+       FALLBACK IMAGE GENERATOR (HANDLES MISSING LOCAL IMAGES)
+       ========================================================================== */
+    function handleImageError(imgElem, type) {
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = 600;
+      tempCanvas.height = 450;
+      const tCtx = tempCanvas.getContext('2d');
+
+      // Romantic Gradient
+      const grad = tCtx.createLinearGradient(0, 0, 600, 450);
+      grad.addColorStop(0, '#fce7f3');
+      grad.addColorStop(1, '#fbcfe8');
+      tCtx.fillStyle = grad;
+      tCtx.fillRect(0, 0, 600, 450);
+
+      // Frame
+      tCtx.strokeStyle = '#f472b6';
+      tCtx.lineWidth = 8;
+      tCtx.strokeRect(15, 15, 570, 420);
+
+      // Icon & Text
+      tCtx.fillStyle = '#db2777';
+      tCtx.font = 'bold 36px sans-serif';
+      tCtx.textAlign = 'center';
+
+      if (type === 'card') {
+        tCtx.fillText('💒 Jakkrit & Narumon', 300, 200);
+        tCtx.font = '22px sans-serif';
+        tCtx.fillText('22 November 2026', 300, 250);
+      } else {
+        const labels = {
+          puzzle1: 'Siam Love Memory 💖',
+          puzzle2: 'Vintage Posters 📸',
+          puzzle3: 'Warm Brick Wall 🧱',
+          puzzle4: 'Classic Stairs 🏛️'
+        };
+        tCtx.fillText(labels[type] || 'Wedding Memory', 300, 210);
+      }
+
+      imgElem.src = tempCanvas.toDataURL();
+    }
+
+    /* ==========================================================================
+       NAVIGATION & VIEW SWITCHING
+       ========================================================================== */
+    function goToHome() {
+      document.getElementById('view-home').classList.remove('hidden');
+      document.getElementById('view-home').classList.add('flex');
+      document.getElementById('view-select').classList.add('hidden');
+      document.getElementById('view-game').classList.add('hidden');
+      stopTimer();
+    }
+
+    function goToSelection() {
+      initAudioContext();
+      if (!isAudioPlaying) startLoveMusic(); // Auto start soft background music on interaction
+
+      document.getElementById('view-home').classList.add('hidden');
+      document.getElementById('view-home').classList.remove('flex');
+      document.getElementById('view-select').classList.remove('hidden');
+      document.getElementById('view-select').classList.add('flex');
+      document.getElementById('view-game').classList.add('hidden');
+      stopTimer();
+    }
+
+    function selectPuzzle(index) {
+      currentPuzzleIndex = index;
+      const data = puzzleData[index];
+
+      document.getElementById('view-select').classList.add('hidden');
+      document.getElementById('view-game').classList.remove('hidden');
+      document.getElementById('view-game').classList.add('flex');
+
+      document.getElementById('game-photo-title').textContent = data.title;
+      document.getElementById('preview-img-target').src = data.src;
+
+      // Start Game
+      initJigsawGame(data.src);
+    }
+
+    function setDifficulty(size) {
+      gridSize = size;
+      [3, 4, 5].forEach(s => {
+        const btn = document.getElementById(`diff-${s}`);
+        if (s === size) {
+          btn.className = 'px-3 py-1 rounded-full text-xs sm:text-sm font-medium border transition bg-rose-500 text-white border-rose-500 shadow';
+        } else {
+          btn.className = 'px-3 py-1 rounded-full text-xs sm:text-sm font-medium border transition bg-white text-slate-700 border-slate-300 hover:bg-slate-50';
+        }
+      });
+      const diffLabels = { 3: 'ง่าย (3x3)', 4: 'ปานกลาง (4x4)', 5: 'ท้าทาย (5x5)' };
+      document.getElementById('game-diff-tag').textContent = diffLabels[size];
+    }
+
+    /* ==========================================================================
+       JIGSAW PUZZLE GAME ENGINE (CANVAS BASED)
+       ========================================================================== */
+    function initJigsawGame(imgSrc) {
+      canvas = document.getElementById('jigsaw-canvas');
+      ctx = canvas.getContext('2d');
+
+      stopTimer();
+      secondsElapsed = 0;
+      moveCount = 0;
+      isGameWon = false;
+      updateStats();
+
+      puzzleImg = new Image();
+      puzzleImg.onload = () => {
+        setupCanvasDimensions();
+        createJigsawPieces();
+        startTimer();
+        renderCanvas();
+      };
+      puzzleImg.onerror = function() {
+        handleImageError(this, `puzzle${currentPuzzleIndex + 1}`);
+      };
+      puzzleImg.src = imgSrc;
+
+      // Attach Touch & Mouse Events
+      canvas.onmousedown = handlePointerDown;
+      canvas.onmousemove = handlePointerMove;
+      canvas.onmouseup = handlePointerUp;
+
+      canvas.ontouchstart = handleTouchStart;
+      canvas.ontouchmove = handleTouchMove;
+      canvas.ontouchend = handlePointerUp;
+    }
+
+    function setupCanvasDimensions() {
+      const containerWidth = Math.min(window.innerWidth - 32, 650);
+      
+      // Calculate Board Dimensions
+      const aspect = puzzleImg.height / puzzleImg.width || 0.75;
+      boardW = Math.min(containerWidth - 20, 520);
+      boardH = boardW * aspect;
+
+      cellW = boardW / gridSize;
+      cellH = boardH / gridSize;
+
+      boardX = (containerWidth - boardW) / 2;
+      boardY = 15;
+
+      trayY = boardY + boardH + 25;
+      trayH = Math.max(220, cellH * 2.2);
+
+      canvas.width = containerWidth;
+      canvas.height = trayY + trayH;
+    }
+
+    function generateGridTabs(rows, cols) {
+      const hTabs = [];
+      for (let r = 0; r < rows - 1; r++) {
+        hTabs[r] = [];
+        for (let c = 0; c < cols; c++) {
+          hTabs[r][c] = Math.random() < 0.5 ? 1 : -1;
+        }
+      }
+      const vTabs = [];
+      for (let r = 0; r < rows; r++) {
+        vTabs[r] = [];
+        for (let c = 0; c < cols - 1; c++) {
+          vTabs[r][c] = Math.random() < 0.5 ? 1 : -1;
+        }
+      }
+      return { hTabs, vTabs };
+    }
+
+    function createJigsawPieces() {
+      pieces = [];
+      const { hTabs, vTabs } = generateGridTabs(gridSize, gridSize);
+
+      for (let r = 0; r < gridSize; r++) {
+        for (let c = 0; c < gridSize; c++) {
+          const targetX = boardX + c * cellW;
+          const targetY = boardY + r * cellH;
+
+          // Tab definitions: 0 (flat), 1 (out), -1 (in)
+          const top = r === 0 ? 0 : -hTabs[r - 1][c];
+          const bottom = r === gridSize - 1 ? 0 : hTabs[r][c];
+          const left = c === 0 ? 0 : -vTabs[r][c - 1];
+          const right = c === gridSize - 1 ? 0 : vTabs[r][c];
+
+          // Scatter initial position in Tray
+          const margin = 10;
+          const initX = Math.random() * (canvas.width - cellW - margin * 2) + margin;
+          const initY = trayY + Math.random() * (trayH - cellH - margin) + 5;
+
+          pieces.push({
+            id: r * gridSize + c,
+            row: r,
+            col: c,
+            targetX,
+            targetY,
+            x: initX,
+            y: initY,
+            isLocked: false,
+            top, right, bottom, left
+          });
+        }
+      }
+    }
+
+    /* --- CANVAS DRAWING METHODS --- */
+    function renderCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 1. Draw Board Background Frame
+      ctx.fillStyle = '#ffffff';
+      ctx.strokeStyle = '#f472b6';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.roundRect(boardX - 6, boardY - 6, boardW + 12, boardH + 12, 12);
+      ctx.fill();
+      ctx.stroke();
+
+      // Faint Guide Image on Target Board
+      ctx.save();
+      ctx.globalAlpha = 0.15;
+      ctx.drawImage(puzzleImg, boardX, boardY, boardW, boardH);
+      ctx.restore();
+
+      // Faint Grid Lines
+      ctx.strokeStyle = 'rgba(244, 114, 182, 0.3)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+      for (let i = 1; i < gridSize; i++) {
+        // Vertical grid line
+        ctx.beginPath();
+        ctx.moveTo(boardX + i * cellW, boardY);
+        ctx.lineTo(boardX + i * cellW, boardY + boardH);
+        ctx.stroke();
+        // Horizontal grid line
+        ctx.beginPath();
+        ctx.moveTo(boardX, boardY + i * cellH);
+        ctx.lineTo(boardX + boardW, boardY + i * cellH);
+        ctx.stroke();
+      }
+      ctx.setLineDash([]);
+
+      // 2. Draw Tray Background Area
+      ctx.fillStyle = 'rgba(253, 242, 248, 0.8)';
+      ctx.strokeStyle = 'rgba(244, 114, 182, 0.4)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.roundRect(10, trayY - 10, canvas.width - 20, trayH, 16);
+      ctx.fill();
+      ctx.stroke();
+
+      // Tray Label
+      ctx.fillStyle = '#9d174d';
+      ctx.font = 'bold 12px Prompt, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('📥 ถาดชิ้นส่วนจิ๊กซอว์ (ลากไปวางในตารางด้านบน)', 22, trayY + 12);
+
+      // 3. Draw Locked Pieces First
+      pieces.filter(p => p.isLocked).forEach(p => drawSinglePiece(p));
+
+      // 4. Draw Unlocked Pieces
+      pieces.filter(p => !p.isLocked && p !== draggedPiece).forEach(p => drawSinglePiece(p));
+
+      // 5. Draw Currently Dragged Piece On Top
+      if (draggedPiece) {
+        drawSinglePiece(draggedPiece, true);
+      }
+    }
+
+    function drawSinglePiece(p, isDragging = false) {
+      ctx.save();
+
+      // Shadow if dragging
+      if (isDragging) {
+        ctx.shadowColor = 'rgba(236, 72, 153, 0.5)';
+        ctx.shadowBlur = 12;
+      }
+
+      // Create Path
+      ctx.beginPath();
+      createJigsawPath(ctx, p.x, p.y, cellW, cellH, p.top, p.right, p.bottom, p.left);
+      ctx.clip();
+
+      // Draw clipped portion of image
+      const sourceX = p.x - p.col * cellW;
+      const sourceY = p.y - p.row * cellH;
+      ctx.drawImage(puzzleImg, sourceX, sourceY, boardW, boardH);
+
+      ctx.restore();
+
+      // Stroke Piece Edges
+      ctx.save();
+      ctx.beginPath();
+      createJigsawPath(ctx, p.x, p.y, cellW, cellH, p.top, p.right, p.bottom, p.left);
+      ctx.lineWidth = p.isLocked ? 1.5 : 2;
+      ctx.strokeStyle = p.isLocked ? 'rgba(255, 255, 255, 0.6)' : '#db2777';
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function createJigsawPath(ctx, x, y, w, h, top, right, bottom, left) {
+      ctx.moveTo(x, y);
+      drawJigsawEdge(ctx, x, y, x + w, y, top); // Top
+      drawJigsawEdge(ctx, x + w, y, x + w, y + h, right); // Right
+      drawJigsawEdge(ctx, x + w, y + h, x, y + h, bottom); // Bottom
+      drawJigsawEdge(ctx, x, y + h, x, y, left); // Left
+      ctx.closePath();
+    }
+
+    function drawJigsawEdge(ctx, x1, y1, x2, y2, tabType) {
+      if (tabType === 0) {
+        ctx.lineTo(x2, y2);
+        return;
+      }
+      const dx = x2 - x1;
+      const dy = y2 - y1;
+      const len = Math.hypot(dx, dy);
+
+      // Normal vector
+      const nx = -dy / len;
+      const ny = dx / len;
+
+      const p = (pct) => ({ x: x1 + dx * pct, y: y1 + dy * pct });
+
+      const p0 = p(0.35);
+      const p1 = p(0.40);
+      const p2 = p(0.50);
+      const p3 = p(0.60);
+      const p4 = p(0.65);
+
+      const tabHeight = len * 0.18 * tabType;
+
+      ctx.lineTo(p0.x, p0.y);
+      ctx.bezierCurveTo(
+        p0.x + nx * tabHeight * 0.5, p0.y + ny * tabHeight * 0.5,
+        p1.x + nx * tabHeight * 1.2 - (dx/len)*tabHeight*0.4, p1.y + ny * tabHeight * 1.2 - (dy/len)*tabHeight*0.4,
+        p2.x + nx * tabHeight * 1.2, p2.y + ny * tabHeight * 1.2
+      );
+      ctx.bezierCurveTo(
+        p3.x + nx * tabHeight * 1.2 + (dx/len)*tabHeight*0.4, p3.y + ny * tabHeight * 1.2 + (dy/len)*tabHeight*0.4,
+        p4.x + nx * tabHeight * 0.5, p4.y + ny * tabHeight * 0.5,
+        p4.x, p4.y
+      );
+      ctx.lineTo(x2, y2);
+    }
+
+    /* --- INTERACTION HANDLERS --- */
+    function getPointerPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function handlePointerDown(e) {
+      if (isGameWon) return;
+      const pos = getPointerPos(e);
+
+      // Check unlocked pieces in reverse order (topmost first)
+      for (let i = pieces.length - 1; i >= 0; i--) {
+        const p = pieces[i];
+        if (!p.isLocked) {
+          if (pos.x >= p.x && pos.x <= p.x + cellW &&
+              pos.y >= p.y && pos.y <= p.y + cellH) {
+            draggedPiece = p;
+            dragOffsetX = pos.x - p.x;
+            dragOffsetY = pos.y - p.y;
+            
+            // Move piece to top of list
+            pieces.splice(i, 1);
+            pieces.push(p);
+            renderCanvas();
+            break;
+          }
+        }
+      }
+    }
+
+    function handlePointerMove(e) {
+      if (!draggedPiece) return;
+      e.preventDefault();
+      const pos = getPointerPos(e);
+
+      draggedPiece.x = pos.x - dragOffsetX;
+      draggedPiece.y = pos.y - dragOffsetY;
+
+      renderCanvas();
+    }
+
+    function handleTouchStart(e) {
+      if (e.touches.length === 1) {
+        handlePointerDown(e);
+      }
+    }
+
+    function handleTouchMove(e) {
+      if (draggedPiece) {
+        handlePointerMove(e);
+      }
+    }
+
+    function handlePointerUp() {
+      if (!draggedPiece) return;
+
+      moveCount++;
+      const p = draggedPiece;
+      const dist = Math.hypot(p.x - p.targetX, p.y - p.targetY);
+
+      // Snap Tolerance
+      if (dist < Math.max(25, cellW * 0.35)) {
+        p.x = p.targetX;
+        p.y = p.targetY;
+        p.isLocked = true;
+        playSnapSound();
+        createSparkle(p.targetX + cellW / 2, p.targetY + cellH / 2);
+      }
+
+      draggedPiece = null;
+      updateStats();
+      renderCanvas();
+
+      checkWinCondition();
+    }
+
+    /* --- STATS & WIN LOGIC --- */
+    function updateStats() {
+      const lockedCount = pieces.filter(p => p.isLocked).length;
+      const total = gridSize * gridSize;
+      const pct = Math.round((lockedCount / total) * 100);
+
+      document.getElementById('stat-progress').textContent = `${lockedCount} / ${total} (${pct}%)`;
+      document.getElementById('stat-moves').textContent = `${moveCount} ครั้ง`;
+    }
+
+    function checkWinCondition() {
+      const total = gridSize * gridSize;
+      const lockedCount = pieces.filter(p => p.isLocked).length;
+
+      if (lockedCount === total && !isGameWon) {
+        isGameWon = true;
+        stopTimer();
+        playWinFanfare();
+
+        document.getElementById('win-time').textContent = formatTime(secondsElapsed);
+        document.getElementById('win-moves').textContent = `${moveCount} ครั้ง`;
+
+        setTimeout(() => {
+          document.getElementById('modal-win').classList.remove('hidden');
+          document.getElementById('modal-win').classList.add('flex');
+          launchConfetti();
+        }, 300);
+      }
+    }
+
+    function restartPuzzle() {
+      if (puzzleImg.src) {
+        initJigsawGame(puzzleImg.src);
+      }
+    }
+
+    /* --- TIMER UTILS --- */
+    function startTimer() {
+      stopTimer();
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        document.getElementById('stat-time').textContent = formatTime(secondsElapsed);
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+    }
+
+    function formatTime(totalSec) {
+      const m = Math.floor(totalSec / 60).toString().padStart(2, '0');
+      const s = (totalSec % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    /* --- MODALS HANDLER --- */
+    function openPreviewModal() {
+      document.getElementById('modal-preview').classList.remove('hidden');
+      document.getElementById('modal-preview').classList.add('flex');
+    }
+
+    function closePreviewModal() {
+      document.getElementById('modal-preview').classList.add('hidden');
+    }
+
+    function closeWinModal() {
+      document.getElementById('modal-win').classList.add('hidden');
+    }
+
+    /* ==========================================================================
+       VISUAL EFFECTS (FLOATING HEARTS & SPARKLES & CONFETTI)
+       ========================================================================== */
+    function createFloatingHearts() {
+      const container = document.getElementById('heart-container');
+      const symbols = ['💖', '🌸', '✨', '💕', '💗'];
+
+      setInterval(() => {
+        if (document.hidden) return;
+        const heart = document.createElement('div');
+        heart.className = 'heart-particle text-sm sm:text-xl';
+        heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        container.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+      }, 800);
+    }
+
+    function createSparkle(x, y) {
+      const symbols = ['✨', '💖', '⭐'];
+      for (let i = 0; i < 4; i++) {
+        const el = document.createElement('div');
+        el.className = 'fixed pointer-events-none z-50 text-base animate-ping';
+        el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        
+        const rect = canvas.getBoundingClientRect();
+        el.style.left = (rect.left + x + (Math.random() * 40 - 20)) + 'px';
+        el.style.top = (rect.top + y + (Math.random() * 40 - 20)) + 'px';
+
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 800);
+      }
+    }
+
+    function launchConfetti() {
+      const colors = ['#f472b6', '#fbbf24', '#38bdf8', '#a7f3d0', '#ec4899'];
+      for (let i = 0; i < 50; i++) {
+        const c = document.createElement('div');
+        c.className = 'fixed z-50 pointer-events-none rounded-full';
+        c.style.width = (Math.random() * 10 + 6) + 'px';
+        c.style.height = (Math.random() * 10 + 6) + 'px';
+        c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        c.style.left = Math.random() * 100 + 'vw';
+        c.style.top = '-20px';
+
+        const duration = Math.random() * 3 + 2;
+        c.style.transition = `all ${duration}s ease-out`;
+
+        document.body.appendChild(c);
+
+        setTimeout(() => {
+          c.style.transform = `translateY(105vh) rotate(${Math.random() * 720}deg)`;
+          c.style.opacity = '0';
+        }, 50);
+
+        setTimeout(() => c.remove(), duration * 1000 + 200);
+      }
+    }
+
+    /* Resize Listener */
+    window.addEventListener('resize', () => {
+      if (!document.getElementById('view-game').classList.contains('hidden') && puzzleImg.src) {
+        setupCanvasDimensions();
+        renderCanvas();
+      }
+    });
+
+    // Initialize Floating Hearts on Page Load
+    window.onload = function() {
+      createFloatingHearts();
+    };
+  </script>
+</body>
+</html>

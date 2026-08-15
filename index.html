@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Congratulations Jakkrit & Narumon - Jigsaw Game</title>
+  <title>Congratulations Jakkrit & Narumon - Picture Swap Game</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -78,14 +78,14 @@
       
 
       <!-- Wedding Card Image -->
-      <div class="relative overflow-hidden rounded-2xl bg-amber-50 shadow-inner">
+      <div class="relative overflow-hidden rounded-2xl">
         <img id="home-card-img" src="w1.jpg" alt="การ์ดแต่งงาน Jakkrit & Narumon" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-500" onerror="handleImageError(this, 'card')">
         
         <!-- Overlay Prompt -->
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-end p-6 text-white text-center">
           <div class="bg-rose-500/90 backdrop-blur-md px-5 py-2.5 rounded-full text-sm sm:text-base font-semibold shadow-lg flex items-center gap-2 animate-bounce">
             <span>🧩</span>
-            <span>คลิกที่การ์ดเพื่อเริ่มต่อจิ๊กซอว์</span>
+            <span>คลิกที่การ์ดเพื่อเริ่มสลับชิ้นส่วนภาพ</span>
           </div>
         </div>
       </div>
@@ -102,10 +102,10 @@
         ‹ กลับหน้าการ์ดแต่งงาน
       </button>
       <h2 class="text-3xl sm:text-4xl font-bold text-slate-800">
-        🌸 เลือกภาพความทรงจำที่ต้องการต่อจิ๊กซอว์ 🌸
+        🌸 เลือกภาพความทรงจำที่ต้องการสลับชิ้นส่วนภาพ 🌸
       </h2>
       <p class="text-slate-600 text-sm sm:text-base">
-        เลือก 1 จาก 4 ภาพประทับใจ แล้วมาลองต่อภาพความรักให้สมบูรณ์กันเลย!
+        เลือก 1 จาก 4 ภาพประทับใจ แล้วมาลองสลับชิ้นส่วนภาพให้สมบูรณ์กันเลย!
       </p>
 
       <!-- Difficulty Selector -->
@@ -142,7 +142,7 @@
           </p>
         </div>
         <button class="mt-4 w-full py-2 bg-rose-50 text-rose-600 group-hover:bg-rose-500 group-hover:text-white rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1">
-          <span>เริ่มต่อภาพนี้</span> ➔
+          <span>เริ่มสลับชิ้นส่วน</span> ➔
         </button>
       </div>
 
@@ -163,7 +163,7 @@
           </p>
         </div>
         <button class="mt-4 w-full py-2 bg-rose-50 text-rose-600 group-hover:bg-rose-500 group-hover:text-white rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1">
-          <span>เริ่มต่อภาพนี้</span> ➔
+          <span>เริ่มสลับชิ้นส่วน</span> ➔
         </button>
       </div>
 
@@ -184,13 +184,13 @@
           </p>
         </div>
         <button class="mt-4 w-full py-2 bg-rose-50 text-rose-600 group-hover:bg-rose-500 group-hover:text-white rounded-xl text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1">
-          <span>เริ่มต่อภาพนี้</span> ➔
+          <span>เริ่มสลับชิ้นส่วน</span> ➔
         </button>
       </div>
 
   </section>
 
-  <!-- PAGE 3: JIGSAW GAME CANVAS SCREEN -->
+  <!-- PAGE 3: PICTURE SWAP GAME SCREEN -->
   <section id="view-game" class="min-h-screen hidden flex-col items-center p-3 sm:p-6 relative z-10 max-w-5xl mx-auto">
     <!-- Top Nav Bar -->
     <div class="w-full flex flex-wrap items-center justify-between gap-3 bg-white/90 backdrop-blur-md p-3 sm:p-4 rounded-2xl shadow-sm border border-pink-100 mb-4">
@@ -229,11 +229,11 @@
         <span id="stat-time" class="text-sm sm:text-lg font-bold text-slate-800">00:00</span>
       </div>
       <div>
-        <span class="text-[11px] text-slate-500 block">🧩 ความคืบหน้า</span>
+        <span class="text-[11px] text-slate-500 block">🧩 ชิ้นส่วนถูกต้อง</span>
         <span id="stat-progress" class="text-sm sm:text-lg font-bold text-rose-600">0 / 9 (0%)</span>
       </div>
       <div>
-        <span class="text-[11px] text-slate-500 block">🎯 ย้ายชิ้นส่วน</span>
+        <span class="text-[11px] text-slate-500 block">🎯 จำนวนครั้งที่สลับ</span>
         <span id="stat-moves" class="text-sm sm:text-lg font-bold text-slate-800">0 ครั้ง</span>
       </div>
     </div>
@@ -241,10 +241,10 @@
     <!-- Game Canvas Container -->
     <div class="w-full flex flex-col items-center justify-center relative">
       <div class="bg-white p-2 sm:p-4 rounded-2xl shadow-xl border-2 border-pink-200 overflow-hidden max-w-full">
-        <canvas id="jigsaw-canvas" class="touch-none cursor-grab active:cursor-grabbing rounded-lg bg-slate-50 block mx-auto"></canvas>
+        <canvas id="jigsaw-canvas" class="touch-none cursor-pointer rounded-lg bg-slate-50 block mx-auto"></canvas>
       </div>
       <p class="text-xs text-slate-500 mt-3 text-center">
-        💡 <b>วิธีเล่น:</b> ลากชิ้นส่วนจากถาดด้านล่างไปวางในกรอบตารางภาพด้านบน เมื่อใกล้ตำแหน่งถูกต้องชิ้นส่วนจะล็อกให้อัตโนมัติ!
+        💡 <b>วิธีเล่น:</b> คลิกชิ้นส่วน 1 ชิ้น แล้วคลิกอีกชิ้นเพื่อสลับตำแหน่ง จัดเรียงภาพให้เหมือนภาพต้นแบบจนสมบูรณ์!
       </p>
     </div>
   </section>
@@ -270,7 +270,7 @@
     <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full text-center shadow-2xl border-4 border-amber-300 relative transform animate-bounce-short">
       <div class="text-5xl mb-2">🎉</div>
       <h2 class="text-3xl font-bold font-wedding text-rose-600">Congratulations!</h2>
-      <h3 class="text-xl font-bold text-slate-800 mt-1">คุณต่อจิ๊กซอว์สำเร็จแล้ว!</h3>
+      <h3 class="text-xl font-bold text-slate-800 mt-1">คุณสลับชิ้นส่วนภาพสำเร็จแล้ว!</h3>
       <p class="text-sm text-slate-600 mt-2">
         "ขอให้ความรักของ Jakkrit & Narumon งดงาม สมบูรณ์แบบ และเต็มไปด้วยความสุขเฉกเช่นภาพนี้!"
       </p>
@@ -281,7 +281,7 @@
           <span id="win-time" class="font-bold text-rose-600">00:00</span>
         </div>
         <div class="flex justify-between">
-          <span>🎯 จำนวนครั้งที่ลากวาง:</span>
+          <span>🎯 จำนวนครั้งที่สลับชิ้นส่วน:</span>
           <span id="win-moves" class="font-bold text-rose-600">0 ครั้ง</span>
         </div>
       </div>
@@ -336,9 +336,8 @@
     let canvas, ctx;
     let puzzleImg = new Image();
     let pieces = [];
-    let draggedPiece = null;
-    let dragOffsetX = 0;
-    let dragOffsetY = 0;
+    let draggedPiece = null; // retained only for compatibility
+    let selectedPiece = null;
 
     // Dimensions
     let boardX = 0, boardY = 0;
@@ -542,6 +541,10 @@
       });
       const diffLabels = { 3: 'ง่าย (3x3)', 4: 'ปานกลาง (4x4)', 5: 'ท้าทาย (5x5)' };
       document.getElementById('game-diff-tag').textContent = diffLabels[size];
+
+      if (!document.getElementById('view-game').classList.contains('hidden') && puzzleImg.src) {
+        initJigsawGame(puzzleImg.src);
+      }
     }
 
     /* ==========================================================================
@@ -555,109 +558,74 @@
       secondsElapsed = 0;
       moveCount = 0;
       isGameWon = false;
+      selectedPiece = null;
       updateStats();
 
       puzzleImg = new Image();
+
       puzzleImg.onload = () => {
         setupCanvasDimensions();
-        createJigsawPieces();
+        createSwapPieces();
         startTimer();
         renderCanvas();
       };
+
       puzzleImg.onerror = function() {
         handleImageError(this, `puzzle${currentPuzzleIndex + 1}`);
       };
+
       puzzleImg.src = imgSrc;
 
-      // Attach Touch & Mouse Events
-      canvas.onmousedown = handlePointerDown;
-      canvas.onmousemove = handlePointerMove;
-      canvas.onmouseup = handlePointerUp;
-
-      canvas.ontouchstart = handleTouchStart;
-      canvas.ontouchmove = handleTouchMove;
-      canvas.ontouchend = handlePointerUp;
+      // Click/touch only — no dragging.
+      canvas.onmousedown = handleSwapClick;
+      canvas.ontouchstart = handleSwapTouch;
+      canvas.onmousemove = null;
+      canvas.onmouseup = null;
+      canvas.ontouchmove = null;
+      canvas.ontouchend = null;
     }
 
-    function setupCanvasDimensions() {
-      const containerWidth = Math.min(window.innerWidth - 32, 650);
-      
-      // Calculate Board Dimensions
-      const aspect = puzzleImg.height / puzzleImg.width || 0.75;
-      boardW = Math.min(containerWidth - 20, 520);
-      boardH = boardW * aspect;
-
-      cellW = boardW / gridSize;
-      cellH = boardH / gridSize;
-
-      boardX = (containerWidth - boardW) / 2;
-      boardY = 15;
-
-      trayY = boardY + boardH + 25;
-      trayH = Math.max(220, cellH * 2.2);
-
-      canvas.width = containerWidth;
-      canvas.height = trayY + trayH;
-    }
-
-    function generateGridTabs(rows, cols) {
-      const hTabs = [];
-      for (let r = 0; r < rows - 1; r++) {
-        hTabs[r] = [];
-        for (let c = 0; c < cols; c++) {
-          hTabs[r][c] = Math.random() < 0.5 ? 1 : -1;
-        }
-      }
-      const vTabs = [];
-      for (let r = 0; r < rows; r++) {
-        vTabs[r] = [];
-        for (let c = 0; c < cols - 1; c++) {
-          vTabs[r][c] = Math.random() < 0.5 ? 1 : -1;
-        }
-      }
-      return { hTabs, vTabs };
-    }
-
-    function createJigsawPieces() {
+    function createSwapPieces() {
       pieces = [];
-      const { hTabs, vTabs } = generateGridTabs(gridSize, gridSize);
+      selectedPiece = null;
 
-      for (let r = 0; r < gridSize; r++) {
-        for (let c = 0; c < gridSize; c++) {
-          const targetX = boardX + c * cellW;
-          const targetY = boardY + r * cellH;
+      const total = gridSize * gridSize;
+      const shuffledIds = Array.from({ length: total }, (_, i) => i);
 
-          // Tab definitions: 0 (flat), 1 (out), -1 (in)
-          const top = r === 0 ? 0 : -hTabs[r - 1][c];
-          const bottom = r === gridSize - 1 ? 0 : hTabs[r][c];
-          const left = c === 0 ? 0 : -vTabs[r][c - 1];
-          const right = c === gridSize - 1 ? 0 : vTabs[r][c];
-
-          // Scatter initial position in Tray
-          const margin = 10;
-          const initX = Math.random() * (canvas.width - cellW - margin * 2) + margin;
-          const initY = trayY + Math.random() * (trayH - cellH - margin) + 5;
-
-          pieces.push({
-            id: r * gridSize + c,
-            row: r,
-            col: c,
-            targetX,
-            targetY,
-            x: initX,
-            y: initY,
-            isLocked: false,
-            top, right, bottom, left
-          });
+      // Shuffle until the board is not already solved.
+      do {
+        for (let i = shuffledIds.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffledIds[i], shuffledIds[j]] = [shuffledIds[j], shuffledIds[i]];
         }
+      } while (shuffledIds.every((id, i) => id === i) && total > 1);
+
+      for (let slot = 0; slot < total; slot++) {
+        const id = shuffledIds[slot];
+        const targetRow = Math.floor(id / gridSize);
+        const targetCol = id % gridSize;
+        const row = Math.floor(slot / gridSize);
+        const col = slot % gridSize;
+
+        pieces.push({
+          id,
+          targetRow,
+          targetCol,
+          row,
+          col,
+          targetX: boardX + targetCol * cellW,
+          targetY: boardY + targetRow * cellH,
+          x: boardX + col * cellW,
+          y: boardY + row * cellH,
+          isLocked: id === slot
+        });
       }
     }
 
-    /* --- CANVAS DRAWING METHODS --- */
     function renderCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // 1. Draw Board Background Frame
+      // Board frame.
       ctx.fillStyle = '#ffffff';
       ctx.strokeStyle = '#f472b6';
       ctx.lineWidth = 3;
@@ -666,230 +634,224 @@
       ctx.fill();
       ctx.stroke();
 
-      // Faint Guide Image on Target Board
-      ctx.save();
-      ctx.globalAlpha = 0.15;
-      ctx.drawImage(puzzleImg, boardX, boardY, boardW, boardH);
-      ctx.restore();
+      // Draw all shuffled tiles directly inside the picture.
+      pieces.forEach(p => drawSwapPiece(p));
 
-      // Faint Grid Lines
-      ctx.strokeStyle = 'rgba(244, 114, 182, 0.3)';
-      ctx.lineWidth = 1;
-      ctx.setLineDash([4, 4]);
-      for (let i = 1; i < gridSize; i++) {
-        // Vertical grid line
+      // Highlight the first selected tile.
+      if (selectedPiece) {
+        ctx.save();
+        ctx.strokeStyle = '#f59e0b';
+        ctx.lineWidth = 5;
+        ctx.shadowColor = 'rgba(245, 158, 11, 0.45)';
+        ctx.shadowBlur = 12;
+        ctx.strokeRect(
+          selectedPiece.x + 3,
+          selectedPiece.y + 3,
+          cellW - 6,
+          cellH - 6
+        );
+        ctx.restore();
+
+        ctx.save();
+        ctx.fillStyle = '#f59e0b';
         ctx.beginPath();
-        ctx.moveTo(boardX + i * cellW, boardY);
-        ctx.lineTo(boardX + i * cellW, boardY + boardH);
-        ctx.stroke();
-        // Horizontal grid line
-        ctx.beginPath();
-        ctx.moveTo(boardX, boardY + i * cellH);
-        ctx.lineTo(boardX + boardW, boardY + i * cellH);
-        ctx.stroke();
+        ctx.arc(
+          selectedPiece.x + cellW - 14,
+          selectedPiece.y + 14,
+          8,
+          0,
+          Math.PI * 2
+        );
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('1', selectedPiece.x + cellW - 14, selectedPiece.y + 14);
+        ctx.restore();
       }
-      ctx.setLineDash([]);
 
-      // 2. Draw Tray Background Area
-      ctx.fillStyle = 'rgba(253, 242, 248, 0.8)';
+      // Instruction strip.
+      ctx.fillStyle = 'rgba(253, 242, 248, 0.95)';
       ctx.strokeStyle = 'rgba(244, 114, 182, 0.4)';
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.roundRect(10, trayY - 10, canvas.width - 20, trayH, 16);
+      ctx.roundRect(10, trayY - 5, canvas.width - 20, trayH, 12);
       ctx.fill();
       ctx.stroke();
 
-      // Tray Label
       ctx.fillStyle = '#9d174d';
       ctx.font = 'bold 12px Prompt, sans-serif';
-      ctx.textAlign = 'left';
-      ctx.fillText('📥 ถาดชิ้นส่วนจิ๊กซอว์ (ลากไปวางในตารางด้านบน)', 22, trayY + 12);
-
-      // 3. Draw Locked Pieces First
-      pieces.filter(p => p.isLocked).forEach(p => drawSinglePiece(p));
-
-      // 4. Draw Unlocked Pieces
-      pieces.filter(p => !p.isLocked && p !== draggedPiece).forEach(p => drawSinglePiece(p));
-
-      // 5. Draw Currently Dragged Piece On Top
-      if (draggedPiece) {
-        drawSinglePiece(draggedPiece, true);
-      }
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(
+        selectedPiece
+          ? '💗 เลือกชิ้นที่ 2 เพื่อสลับตำแหน่ง'
+          : '👆 คลิกชิ้นส่วน 2 ชิ้น เพื่อสลับตำแหน่งกัน',
+        canvas.width / 2,
+        trayY + 16
+      );
+      ctx.textBaseline = 'alphabetic';
     }
 
-    function drawSinglePiece(p, isDragging = false) {
+    function drawSwapPiece(p) {
+      const sx = p.targetCol * cellW;
+      const sy = p.targetRow * cellH;
+
       ctx.save();
-
-      // Shadow if dragging
-      if (isDragging) {
-        ctx.shadowColor = 'rgba(236, 72, 153, 0.5)';
-        ctx.shadowBlur = 12;
-      }
-
-      // Create Path
       ctx.beginPath();
-      createJigsawPath(ctx, p.x, p.y, cellW, cellH, p.top, p.right, p.bottom, p.left);
+      ctx.rect(p.x + 1, p.y + 1, cellW - 2, cellH - 2);
       ctx.clip();
 
-      // Draw clipped portion of image
-      const sourceX = p.x - p.col * cellW;
-      const sourceY = p.y - p.row * cellH;
-      ctx.drawImage(puzzleImg, sourceX, sourceY, boardW, boardH);
-
+      // Draw the correct part of the original image in the current slot.
+      ctx.drawImage(
+        puzzleImg,
+        sx, sy, cellW, cellH,
+        p.x, p.y, cellW, cellH
+      );
       ctx.restore();
 
-      // Stroke Piece Edges
+      // Tile divider.
       ctx.save();
-      ctx.beginPath();
-      createJigsawPath(ctx, p.x, p.y, cellW, cellH, p.top, p.right, p.bottom, p.left);
-      ctx.lineWidth = p.isLocked ? 1.5 : 2;
-      ctx.strokeStyle = p.isLocked ? 'rgba(255, 255, 255, 0.6)' : '#db2777';
-      ctx.stroke();
+      ctx.lineWidth = p.isLocked ? 1 : 2;
+      ctx.strokeStyle = p.isLocked
+        ? 'rgba(255,255,255,0.8)'
+        : 'rgba(219,39,119,0.85)';
+      ctx.strokeRect(p.x + 1, p.y + 1, cellW - 2, cellH - 2);
       ctx.restore();
+
+      // Correct indicator.
+      if (p.isLocked) {
+        ctx.save();
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.82)';
+        ctx.beginPath();
+        ctx.arc(p.x + 15, p.y + 15, 9, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('✓', p.x + 15, p.y + 15);
+        ctx.restore();
+      }
     }
 
-    function createJigsawPath(ctx, x, y, w, h, top, right, bottom, left) {
-      ctx.moveTo(x, y);
-      drawJigsawEdge(ctx, x, y, x + w, y, top); // Top
-      drawJigsawEdge(ctx, x + w, y, x + w, y + h, right); // Right
-      drawJigsawEdge(ctx, x + w, y + h, x, y + h, bottom); // Bottom
-      drawJigsawEdge(ctx, x, y + h, x, y, left); // Left
-      ctx.closePath();
+    function getPieceAtPosition(pos) {
+      for (let i = pieces.length - 1; i >= 0; i--) {
+        const p = pieces[i];
+
+        if (
+          pos.x >= p.x &&
+          pos.x <= p.x + cellW &&
+          pos.y >= p.y &&
+          pos.y <= p.y + cellH
+        ) {
+          return p;
+        }
+      }
+      return null;
     }
 
-    function drawJigsawEdge(ctx, x1, y1, x2, y2, tabType) {
-      if (tabType === 0) {
-        ctx.lineTo(x2, y2);
+    function handleSwapClick(e) {
+      if (isGameWon) return;
+      handleSwapAtPosition(getPointerPos(e));
+    }
+
+    function handleSwapTouch(e) {
+      if (e.touches.length !== 1) return;
+      e.preventDefault();
+      handleSwapAtPosition(getPointerPos(e));
+    }
+
+    function handleSwapAtPosition(pos) {
+      const clickedPiece = getPieceAtPosition(pos);
+      if (!clickedPiece) return;
+
+      // First click selects a piece.
+      if (!selectedPiece) {
+        selectedPiece = clickedPiece;
+        renderCanvas();
         return;
       }
-      const dx = x2 - x1;
-      const dy = y2 - y1;
-      const len = Math.hypot(dx, dy);
 
-      // Normal vector
-      const nx = -dy / len;
-      const ny = dx / len;
+      // Clicking the same piece cancels selection.
+      if (selectedPiece === clickedPiece) {
+        selectedPiece = null;
+        renderCanvas();
+        return;
+      }
 
-      const p = (pct) => ({ x: x1 + dx * pct, y: y1 + dy * pct });
-
-      const p0 = p(0.35);
-      const p1 = p(0.40);
-      const p2 = p(0.50);
-      const p3 = p(0.60);
-      const p4 = p(0.65);
-
-      const tabHeight = len * 0.18 * tabType;
-
-      ctx.lineTo(p0.x, p0.y);
-      ctx.bezierCurveTo(
-        p0.x + nx * tabHeight * 0.5, p0.y + ny * tabHeight * 0.5,
-        p1.x + nx * tabHeight * 1.2 - (dx/len)*tabHeight*0.4, p1.y + ny * tabHeight * 1.2 - (dy/len)*tabHeight*0.4,
-        p2.x + nx * tabHeight * 1.2, p2.y + ny * tabHeight * 1.2
-      );
-      ctx.bezierCurveTo(
-        p3.x + nx * tabHeight * 1.2 + (dx/len)*tabHeight*0.4, p3.y + ny * tabHeight * 1.2 + (dy/len)*tabHeight*0.4,
-        p4.x + nx * tabHeight * 0.5, p4.y + ny * tabHeight * 0.5,
-        p4.x, p4.y
-      );
-      ctx.lineTo(x2, y2);
+      // Second click swaps the two pieces.
+      swapPieces(selectedPiece, clickedPiece);
     }
 
-    /* --- INTERACTION HANDLERS --- */
+    function swapPieces(pieceA, pieceB) {
+      const aRow = pieceA.row;
+      const aCol = pieceA.col;
+      const aX = pieceA.x;
+      const aY = pieceA.y;
+
+      pieceA.row = pieceB.row;
+      pieceA.col = pieceB.col;
+      pieceA.x = pieceB.x;
+      pieceA.y = pieceB.y;
+
+      pieceB.row = aRow;
+      pieceB.col = aCol;
+      pieceB.x = aX;
+      pieceB.y = aY;
+
+      pieceA.isLocked =
+        pieceA.row === pieceA.targetRow &&
+        pieceA.col === pieceA.targetCol;
+
+      pieceB.isLocked =
+        pieceB.row === pieceB.targetRow &&
+        pieceB.col === pieceB.targetCol;
+
+      selectedPiece = null;
+      moveCount++;
+
+      playSnapSound();
+
+      createSparkle(
+        pieceA.x + cellW / 2,
+        pieceA.y + cellH / 2
+      );
+
+      updateStats();
+      renderCanvas();
+      checkWinCondition();
+    }
+
     function getPointerPos(e) {
       const rect = canvas.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
       return {
         x: clientX - rect.left,
         y: clientY - rect.top
       };
     }
 
-    function handlePointerDown(e) {
-      if (isGameWon) return;
-      const pos = getPointerPos(e);
-
-      // Check unlocked pieces in reverse order (topmost first)
-      for (let i = pieces.length - 1; i >= 0; i--) {
-        const p = pieces[i];
-        if (!p.isLocked) {
-          if (pos.x >= p.x && pos.x <= p.x + cellW &&
-              pos.y >= p.y && pos.y <= p.y + cellH) {
-            draggedPiece = p;
-            dragOffsetX = pos.x - p.x;
-            dragOffsetY = pos.y - p.y;
-            
-            // Move piece to top of list
-            pieces.splice(i, 1);
-            pieces.push(p);
-            renderCanvas();
-            break;
-          }
-        }
-      }
-    }
-
-    function handlePointerMove(e) {
-      if (!draggedPiece) return;
-      e.preventDefault();
-      const pos = getPointerPos(e);
-
-      draggedPiece.x = pos.x - dragOffsetX;
-      draggedPiece.y = pos.y - dragOffsetY;
-
-      renderCanvas();
-    }
-
-    function handleTouchStart(e) {
-      if (e.touches.length === 1) {
-        handlePointerDown(e);
-      }
-    }
-
-    function handleTouchMove(e) {
-      if (draggedPiece) {
-        handlePointerMove(e);
-      }
-    }
-
-    function handlePointerUp() {
-      if (!draggedPiece) return;
-
-      moveCount++;
-      const p = draggedPiece;
-      const dist = Math.hypot(p.x - p.targetX, p.y - p.targetY);
-
-      // Snap Tolerance
-      if (dist < Math.max(25, cellW * 0.35)) {
-        p.x = p.targetX;
-        p.y = p.targetY;
-        p.isLocked = true;
-        playSnapSound();
-        createSparkle(p.targetX + cellW / 2, p.targetY + cellH / 2);
-      }
-
-      draggedPiece = null;
-      updateStats();
-      renderCanvas();
-
-      checkWinCondition();
-    }
-
     /* --- STATS & WIN LOGIC --- */
     function updateStats() {
-      const lockedCount = pieces.filter(p => p.isLocked).length;
+      const correctCount = pieces.filter(p => p.isLocked).length;
       const total = gridSize * gridSize;
-      const pct = Math.round((lockedCount / total) * 100);
+      const pct = Math.round((correctCount / total) * 100);
 
-      document.getElementById('stat-progress').textContent = `${lockedCount} / ${total} (${pct}%)`;
+      document.getElementById('stat-progress').textContent = `${correctCount} / ${total} (${pct}%)`;
       document.getElementById('stat-moves').textContent = `${moveCount} ครั้ง`;
     }
 
     function checkWinCondition() {
       const total = gridSize * gridSize;
-      const lockedCount = pieces.filter(p => p.isLocked).length;
+      const correctCount = pieces.filter(p => p.isLocked).length;
 
-      if (lockedCount === total && !isGameWon) {
+      if (correctCount === total && !isGameWon) {
         isGameWon = true;
         stopTimer();
         playWinFanfare();
